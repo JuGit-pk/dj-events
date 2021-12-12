@@ -1,9 +1,8 @@
-import Layout from "/components/Layout";
-import { API_URL } from "/config/index";
-import EventItem from "/components/EventItem";
-import Link from "next/link";
+import Layout from "@/components/Layout";
+import { API_URL } from "@/config/index";
+import EventItem from "@/components/EventItem";
 
-export default function HomePage({ events }) {
+export default function Events({ events }) {
   console.log(events);
   return (
     <Layout>
@@ -12,11 +11,6 @@ export default function HomePage({ events }) {
       {events.map((event) => (
         <EventItem key={event.id} event={event} />
       ))}
-      {events && (
-        <Link href={"/events"}>
-          <a>See all events</a>
-        </Link>
-      )}
     </Layout>
   );
 }
@@ -25,6 +19,6 @@ export async function getStaticProps() {
   const events = await res.json();
   console.log(events);
   return {
-    props: { events: events.slice(0, 3) },
+    props: { events },
   };
 }
